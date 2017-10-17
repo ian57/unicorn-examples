@@ -16,12 +16,12 @@ try:
 except ImportError:
     exit("This script requires the gudev module")
 
-from sense_hat import SenseHat
+import unicornhat as unicorn
 
-sense = SenseHat()
 
-sense.set_rotation(180)
-sense.low_light = False
+unicorn.set_layout(unicorn.HAT)
+unicorn.rotation(0)
+unicorn.brightness(0.5)
 
 sin_off = [[0]*8 for i in range(8)]
 for y in range(8):
@@ -83,8 +83,9 @@ def effect():
                 r = int(max(0, min(255, r)))
                 g = int(max(0, min(255, g)))
                 b = int(max(0, min(255, b)))
-                sense.set_pixel(x, y, r, g, b)
+                unicorn.set_pixel(x, y, r, g, b)
 
+        unicorn.show()
 
         time.sleep(0.01)
 
@@ -100,14 +101,18 @@ def effect():
                 r = int(max(0, min(255, r)))
                 g = int(max(0, min(255, g)))
                 b = int(max(0, min(255, b)))
-                sense.set_pixel(x, y, r, g, b)
+                unicorn.set_pixel(x, y, r, g, b)
+
+        unicorn.show()
 
         time.sleep(0.02)
 
 def clear():
     for y in range(8):
         for x in range(8):
-            sense.set_pixel(x, y, 0, 0, 0)
+            unicorn.set_pixel(x, y, 0, 0, 0)
+
+    unicorn.show()
 
 def callback(client, action, device, user_data):
     if action == "add":

@@ -3,11 +3,7 @@
 import time
 from random import randint
 
-from sense_hat import SenseHat
-
-sense = SenseHat()
-sense.set_rotation(0)
-sense.low_light = True
+import unicornhat as unicorn
 
 
 print("""Drop
@@ -18,8 +14,10 @@ If you're using a Unicorn HAT and only half the screen lights up,
 edit this example and  change 'unicorn.AUTO' to 'unicorn.HAT' below.
 """)
 
-uh_width = 8
-uh_height = 8
+unicorn.set_layout(unicorn.AUTO)
+unicorn.rotation(0)
+unicorn.brightness(0.5)
+uh_width,uh_height=unicorn.get_shape()
 
 heights = []
 
@@ -29,13 +27,15 @@ def setup():
     heights = []
     for b in range(0, (uh_width-2)):
         heights.append(0)
-    sense.clear()
+    unicorn.off()
     for b in range(0, uh_height):
-        sense.set_pixel(0, b, 255, 255, 255)
+        unicorn.set_pixel(0, b, 255, 255, 255)
     for b in range(0, uh_height):
-        sense.set_pixel((uh_width-1), b, 255, 255, 255)
+        unicorn.set_pixel((uh_width-1), b, 255, 255, 255)
     for b in range(1, (uh_width-1)):
-        sense.set_pixel(b, 0, 255, 255, 255)
+        unicorn.set_pixel(b, 0, 255, 255, 255)
+    unicorn.show()
+
 
 def drop_ball():
 
@@ -46,12 +46,14 @@ def drop_ball():
         ball_column = randint(0, (uh_width-3))
     height = heights[ball_column]
     ball_y = (uh_height-1)
-    sense.set_pixel(ball_column + 1, ball_y, ball_colour[0], ball_colour[1], ball_colour[2])
+    unicorn.set_pixel(ball_column + 1, ball_y, ball_colour[0], ball_colour[1], ball_colour[2])
+    unicorn.show()
     dropcount = (uh_height-2) - height
     for y in range(0, dropcount):
-        sense.set_pixel(ball_column + 1, ball_y, 0, 0, 0)
+        unicorn.set_pixel(ball_column + 1, ball_y, 0, 0, 0)
         ball_y -= 1
-        sense.set_pixel(ball_column + 1, ball_y, ball_colour[0], ball_colour[1], ball_colour[2])
+        unicorn.set_pixel(ball_column + 1, ball_y, ball_colour[0], ball_colour[1], ball_colour[2])
+        unicorn.show()
         time.sleep(0.02)
     heights[ball_column] += 1
 
