@@ -2,6 +2,7 @@
 
 import unicornhat as unicorn
 import time
+from var_dump import var_dump
 import signal
 from sys import exit
 
@@ -32,6 +33,22 @@ def animateSprite(sprite,delay=0.1):
                 unicorn.show()
 	        time.sleep(delay)
 
+def animateSprite2(sprite,delay,direction):
+        if (len(sprite)!=0):
+                if direction=='b':
+                        for index,spr in reversed(list(enumerate(sprite))):
+                                print(index,spr)  
+                                unicorn.set_pixels(spr)
+                		unicorn.show()  
+		                time.sleep(delay)
+                else:
+                        for index,spr in enumerate(sprite):
+                                unicorn.set_pixels(spr)
+                		unicorn.show()  
+		                time.sleep(delay)
+        else:
+                time.sleep(delay)
+
 unicorn.set_layout(unicorn.HAT)
 unicorn.rotation(0)
 unicorn.brightness(0.5)
@@ -41,12 +58,13 @@ sprite1 = readSprites('sprites/skulls.png')
 sprite2 = readSprites('sprites/clyde-sheet.png')
 sprite3 = readSprites('sprites/pacmanb-sheet.png')
 
-animateSprite(sprite1)
+#animateSprite(sprite1)
 animateSprite(sprite2,0.05)
+animateSprite2(sprite2,0.05,'b')
 
 
-for index,spr in enumerate(sprite3):
-	unicorn.set_pixels(spr)
-        unicorn.show()
-	time.sleep(0.1)
+#for index,spr in enumerate(sprite3):
+#	unicorn.set_pixels(spr)
+#       unicorn.show()
+#	time.sleep(0.1)
 unicorn.clear()
