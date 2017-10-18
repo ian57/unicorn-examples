@@ -41,6 +41,7 @@ height = 8
 
 TXT = "HELLO WORLD !!!"
 TXT = "One small step for man, One giant leap for man-kind."
+TXT = "Linux Pratique forever!!!"
 
 figletText = figlet_format(TXT+' ', "banner4", width=1000) # banner font generates text with heigth 7
 figletText = figlet_format(TXT+' ', "3x5", width=1000) # banner font generates text with heigth 7
@@ -103,9 +104,9 @@ def step():
 
 unicorn.clear()
 
-#while True:
-for i in range (0, 1*textWidth-8):
-    step()
-    sleep(0.04)
+while True:
+	for i in range (0, 1*textWidth-8):
+	    step()
+	    sleep(0.04)
 
 unicorn.clear()
